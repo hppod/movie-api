@@ -14,10 +14,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
 
+const filmeRoute = require('./app/app.routes')
+
+app.use('/', filmeRoute)
+
 app.get('/', function (req, res) {
     res.send(`API Server online - port ${port}`)
 })
 
 app.listen(port, function (req, res) {
-    console.log(`API listen on port ${port}`)
+    console.log(`Umbler app listening on port ${port}`)
 })
