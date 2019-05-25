@@ -4,13 +4,14 @@
     updateUser - implemented
     destroyUser - implemented
 
-    getUserByIdAndReviews - to implement
+    myReviews - to implement
 
     createUser - implemented
     userLogin - to implement
 */
 
 const { UserModel } = require('./../models')
+const { RRModel } = require('./../models')
 
 class User {
 
@@ -48,6 +49,26 @@ class User {
         UserModel.create(req.body)
             .then((userCreated) => res.status(201).json({ message: 'Create success', userCreated }))
             .catch((error) => res.status(500).json({ message: 'Error on create user', error }))
+    }
+
+    myReviews(req, res) {
+        RRModel.findAll({
+            where: {
+                USER_ID: req.params.id
+            },
+            include: [
+                {
+                    model: MovieModel, as: 'MOVIE',
+                    attributes: [
+                        'TITLE',
+                        'GENRE',
+                        'POSTER_URL'
+                    ]
+                }
+            ]
+        })
+            .then((myReviews) => res.status(200).json({ message: 'Get my reviews success', myReviews }))
+            .catch((error) => res.status(500).json({ message: 'Error on get my reviews', error }))
     }
 }
 
