@@ -11,7 +11,9 @@ const express = require('express')
 const route = express.Router()
 const DirectorController = require('./../controllers/director')
 
-route.get('/director', DirectorController.getAllDirectors)
+route.get('/directors', DirectorController.getAllDirectors)
 route.get('/director/:id', DirectorController.getDirectorById)
+route.get('/directors-movies', DirectorController.getDirectorsAndMovies)
+route.get('/director-movies/:id', DirectorController.getDirectorAndMovies)
 
 module.exports = route
