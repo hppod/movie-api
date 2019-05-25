@@ -11,7 +11,7 @@ class RR {
 
     createReview(req, res) {
         RRModel.create(req.body)
-            .then((review) => res.status(201).json({ message: 'Insert success', review }))
+            .then((reviewCreated) => res.status(201).json({ message: 'Insert success', reviewCreated }))
             .catch((error) => res.status(500).json({ message: 'Error on insert review', error }))
     }
 
