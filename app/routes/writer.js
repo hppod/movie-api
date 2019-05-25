@@ -13,5 +13,7 @@ const WriterController = require('./../controllers/writer')
 
 route.get('/writers', WriterController.getAllWriters)
 route.get('/writer/:id', WriterController.getWriterById)
+route.get('/writers-movies', WriterController.getWritersAndMovies)
+route.get('/writer-movies/:id', WriterController.getWriterAndMovies)
 
 module.exports = route
