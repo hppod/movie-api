@@ -14,6 +14,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
 
+const ActorRoutes = require('./app/routes/actor')
+const DirectorRoutes = require('./app/routes/director')
+const MovieRoutes = require('./app/routes/movie')
+const RRRoutes = require('./app/routes/rr')
+const UserRoutes = require('./app/routes/user')
+const WriterRoutes = require('./app/routes/writer')
+
 app.get('/', function (req, res) {
     res.send('api works')
 })
