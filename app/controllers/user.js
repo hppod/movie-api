@@ -10,8 +10,10 @@
     userLogin - to implement
 */
 
-const { UserModel } = require('./../models')
-const { RRModel } = require('./../models')
+const { UserModel, RRModel, MovieModel } = require('./../models')
+
+RRModel.belongsTo(UserModel, { as: 'USER', foreignKey: 'USER_ID' })
+RRModel.belongsTo(MovieModel, { as: 'MOVIE', foreignKey: 'MOVIE_ID' })
 
 class User {
 
