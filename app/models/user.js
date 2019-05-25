@@ -7,8 +7,6 @@
     PASS VARCHAR(100) NOT NULL
 */
 
-const Sequelize = require('sequelize')
-
 module.exports = (sequelize, DataTypes) => {
     const UserModel = sequelize.define('UserModel', {
 
