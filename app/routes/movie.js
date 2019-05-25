@@ -13,7 +13,7 @@ const express = require('express')
 const route = express.Router()
 const MovieController = require('./../controllers/movie')
 
-route.get('/movie', MovieController.getAllMovies)
+route.get('/movies', MovieController.getAllMovies)
 route.get('/movie/:id', MovieController.getMovieById)
 
 module.exports = route

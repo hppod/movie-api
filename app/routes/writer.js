@@ -11,7 +11,7 @@ const express = require('express')
 const route = express.Router()
 const WriterController = require('./../controllers/writer')
 
-route.get('/writer', WriterController.getAllWriters)
+route.get('/writers', WriterController.getAllWriters)
 route.get('/writer/:id', WriterController.getWriterById)
 
 module.exports = route
