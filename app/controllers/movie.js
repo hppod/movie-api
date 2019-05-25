@@ -1,12 +1,12 @@
 //Movie table controller
 /*
-    GET
-    GET BY ID
+    getAllMovies - implemented
+    getMovieById - implemented
     
-    GET ACTORS
-    GET DIRECTORS
-    GET WRITERS
-    GET REVIEWS
+    getAllActorsOfMovie - to implement
+    getAllDirectorsOfMovie - to implement
+    getAllWritersOfMovie - to implement
+    getAllReviewsOfMovie - to implement
 */
 
 const { MovieModel } = require('./../models')

@@ -1,8 +1,8 @@
 //RR table controller
 /*
-    POST
-    PUT
-    DELETE
+    createReview - implemented
+    updateReview - implemented
+    destroyReview - implemented
 */
 
 const { RRModel } = require('./../models')

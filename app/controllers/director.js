@@ -1,10 +1,10 @@
 //Director table controller
 /*
-    GET
-    GET BY ID
+    getAllDirectors - implemented
+    getDirectorById - implemented
 
-    GET WITH MOVIES
-    GET BY ID WITH MOVIES
+    getDirectorsAndMovies - to implement
+    getDirectorAndMovies - to implement
 */
 
 const { DirectorModel } = require('./../models')
