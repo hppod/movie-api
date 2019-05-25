@@ -18,5 +18,6 @@ route.get('/user/:id', UserController.getUserById)
 route.put('/user/:id', UserController.updateUser)
 route.delete('/user/:id', UserController.destroyUser)
 route.post('/user', UserController.createUser)
+route.get('/my-reviews/:id', UserController.myReviews)
 
 module.exports = route
