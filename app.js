@@ -25,6 +25,13 @@ app.get('/', function (req, res) {
     res.send('api works')
 })
 
+app.use('/', ActorRoutes)
+app.use('/', DirectorRoutes)
+app.use('/', MovieRoutes)
+app.use('/', RRRoutes)
+app.use('/', UserRoutes)
+app.use('/', WriterRoutes)
+
 app.listen(port, function () {
     console.log(`api works on port ${port}`)
 })
