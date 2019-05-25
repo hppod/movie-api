@@ -1,13 +1,13 @@
 //User table controller
 /*
-    GET BY ID
-    PUT
-    DELETE
+    getUserById - implemented
+    updateUser - implemented
+    destroyUser - implemented
 
-    GET BY ID WITH REVIEW
+    getUserByIdAndReviews - to implement
 
-    CREATE USER
-    LOGIN
+    createUser - implemented
+    userLogin - to implement
 */
 
 const { UserModel } = require('./../models')

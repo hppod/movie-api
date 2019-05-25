@@ -1,10 +1,10 @@
 //Writer table controller
 /*
-    GET
-    GET BY ID
+    getAllWriters - implemented
+    getWriterById - implemented
 
-    GET WITH MOVIES
-    GET BY ID WITH MOVIES
+    getWritersAndMovies - to implement
+    getWriterAndMovies - to implement
 */
 
 const { WriterModel } = require('./../models')
