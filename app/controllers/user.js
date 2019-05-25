@@ -4,7 +4,7 @@
     updateUser - implemented
     destroyUser - implemented
 
-    myReviews - to implement
+    myReviews - implemented
 
     createUser - implemented
     userLogin - to implement
@@ -62,6 +62,7 @@ class User {
                 {
                     model: MovieModel, as: 'MOVIE',
                     attributes: [
+                        'ID',
                         'TITLE',
                         'GENRE',
                         'POSTER_URL'
