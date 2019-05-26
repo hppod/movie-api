@@ -15,5 +15,9 @@ const MovieController = require('./../controllers/movie')
 
 route.get('/movies', MovieController.getAllMovies)
 route.get('/movie/:id', MovieController.getMovieById)
+route.get('/movie-actors/:id', MovieController.getAllActorsOfMovie)
+route.get('/movie-directors/:id', MovieController.getAllDirectorsOfMovie)
+route.get('/movie-writers/:id', MovieController.getAllWritersOfMovie)
+route.get('/movie-reviews/:id', MovieController.getAllReviewsOfMovie)
 
 module.exports = route
