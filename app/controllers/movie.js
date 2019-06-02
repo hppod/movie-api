@@ -30,12 +30,6 @@ class Movie {
             .catch((error) => res.status(500).json({ message: 'Error on get ingo movies', error }))
     }
 
-    getAllMovies(req, res) {
-        MovieModel.findAll({ raw: true })
-            .then((allMovies) => res.status(200).json(allMovies))
-            .catch((error) => res.status(500).json({ message: 'Error on get all movies', error }))
-    }
-
     getMovieById(req, res) {
         MovieModel.findOne({
             where: {
@@ -71,17 +65,19 @@ class Movie {
     }
 
     getAllActorsOfMovie(req, res) {
-        AMModel.findAll({
-            where: {
-                MOVIE_ID: req.params.id
-            },
-            include: [
-                {
-                    model: ActorModel, as: 'ACTOR'
-                }
-            ]
-        })
-            .then((actorsOfMovie) => res.status(200).json({ message: 'Get actors of movie success', actorsOfMovie }))
+        sequelize.query(
+            `SELECT 
+            A.ID, A.CHARACTER_NAME, A.NAME, A.ACTOR_URL
+        FROM
+            ACTOR AS A
+                INNER JOIN
+            AM ON AM.ACTOR_ID = A.ID
+                INNER JOIN
+            MOVIE AS M ON AM.MOVIE_ID = M.ID
+        WHERE
+            M.ID = ${req.params.id}`
+        )
+            .then((actorsOfMovie) => res.status(200).json(actorsOfMovie[0]))
             .catch((error) => res.status(500).json({ message: 'Error on get actors of movie', error }))
     }
 
