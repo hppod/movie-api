@@ -19,7 +19,7 @@ class Movie {
             attributes: [
                 'ID',
                 'TITLE',
-                [sequelize.fn('LEFT', sequelize.col('STORYLINE'), 100), 'STORYLINE'],
+                [sequelize.fn('LEFT', sequelize.col('STORYLINE'), 75), 'STORYLINE'],
                 'POSTER_URL'
             ],
             order: [
