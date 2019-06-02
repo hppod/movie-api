@@ -9,13 +9,30 @@
     getAllReviewsOfMovie - implemented
 */
 
+const sequelize = require('./../../config/config')
 const { MovieModel, ActorModel, AMModel, DirectorModel, DMModel, WriterModel, WMModel, RRModel } = require('./../models')
 
 class Movie {
 
+    getInfoMovies(req, res) {
+        MovieModel.findAll({
+            attributes: [
+                'ID',
+                'TITLE',
+                [sequelize.fn('LEFT', sequelize.col('STORYLINE'), 100), 'STORYLINE'],
+                'POSTER_URL'
+            ],
+            order: [
+                ['DATE_PREMIERE', 'DESC']
+            ]
+        })
+            .then((infoMovies) => res.status(200).json(infoMovies))
+            .catch((error) => res.status(500).json({ message: 'Error on get ingo movies', error }))
+    }
+
     getAllMovies(req, res) {
         MovieModel.findAll({ raw: true })
-            .then((allMovies) => res.status(200).json({ message: 'Get all movies success', allMovies }))
+            .then((allMovies) => res.status(200).json(allMovies))
             .catch((error) => res.status(500).json({ message: 'Error on get all movies', error }))
     }
 
