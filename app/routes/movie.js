@@ -14,6 +14,7 @@ const route = express.Router()
 const MovieController = require('./../controllers/movie')
 
 route.get('/info-movies', MovieController.getInfoMovies)
+route.get('/storyline/:id', MovieController.getStoryline)
 route.get('/movies', MovieController.getAllMovies)
 route.get('/movie/:id', MovieController.getMovieById)
 route.get('/movie-actors/:id', MovieController.getAllActorsOfMovie)

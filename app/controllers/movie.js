@@ -42,8 +42,32 @@ class Movie {
                 ID: req.params.id
             }
         })
-            .then((movieById) => res.status(200).json({ message: 'Get movie by id success', movieById }))
+            .then((movieById) => res.status(200).json(movieById))
             .catch((error) => res.status(500).json({ message: 'Error on get movie by id', error }))
+    }
+
+    getStoryline(req, res) {
+        sequelize.query(
+            `SELECT 
+            M.ID,
+            M.STORYLINE,
+            GROUP_CONCAT(DISTINCT ' ', D.NAME) AS DIRECTORS,
+            GROUP_CONCAT(DISTINCT ' ', W.NAME) AS WRITERS
+        FROM
+            MOVIE AS M
+                INNER JOIN
+            DM ON DM.MOVIE_ID = M.ID
+                INNER JOIN
+            DIRECTOR AS D ON D.ID = DM.DIRECTOR_ID
+                INNER JOIN
+            WM ON WM.MOVIE_ID = M.ID
+                INNER JOIN
+            WRITER AS W ON W.ID = WM.WRITER_ID
+        WHERE
+            M.ID = ${req.params.id}`
+        )
+            .then((storyline) => res.status(200).json(storyline[0]))
+            .catch((error) => res.status(500).json({ message: 'Error on get storyline', error }))
     }
 
     getAllActorsOfMovie(req, res) {
