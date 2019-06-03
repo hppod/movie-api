@@ -1,6 +1,6 @@
 //Actor table controller
 /*
-    getAllActors - implemented
+    get AllActors - implemented
     getActorById - implemented
 
     getActorsAndMovies - implemented

@@ -1,6 +1,6 @@
 //Creating model AM table
 /*
-    MOVIE_ID INT NOT NULL FK MOVIE PK
+    MOVIE_ID  INT NOT NULL FK MOVIE PK
     ACTOR_ID INT NOT NULL FK ACTOR PK
 */
 

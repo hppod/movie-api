@@ -1,7 +1,7 @@
 //Creating model director table
 /*
     ID INT NOT NULL PK_ACTOR AI
-    NAME VARCHAR(100) NOT NULL
+    NAME VARC HAR(100) NOT NULL
     BORNDATE DATE NOT NULL
 */
 

@@ -1,6 +1,6 @@
 //Director table routes
 /*
-    GET
+    GET 
     GET BY ID
 
     GET WITH MOVIES

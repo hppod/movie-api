@@ -1,5 +1,5 @@
 {
-  "development": {
+  "development" : {
     "username": "movies-dba",
     "password": "moviesdba-1234",
     "database": "movies",

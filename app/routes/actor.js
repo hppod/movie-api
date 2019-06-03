@@ -1,7 +1,7 @@
 //Actor table routes
 /*
     GET
-    GET BY ID
+    GET BY ID 
 
     GET WITH MOVIES
     GET BY ID WITH MOVIES

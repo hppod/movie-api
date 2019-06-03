@@ -1,7 +1,7 @@
 //Creating model WM table
 /*
     MOVIE_ID INT NOT NULL FK MOVIE PK
-    WRITER_ID INT NOT NULL FK ACTOR PK
+    WRITER_ID INT  NOT NULL FK ACTOR PK
 */
 
 module.exports = (sequelize, DataTypes) => {

@@ -1,7 +1,7 @@
 //Creating model writer table
 /*
     ID INT NOT NULL PK_ACTOR AI
-    NAME VARCHAR(100) NOT NULL
+    NAME VARCHAR(100) NO T NULL
     BORNDATE DATE NOT NULL
 */
 

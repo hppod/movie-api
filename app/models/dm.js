@@ -1,7 +1,7 @@
 //Creating model DM table
 /*
     MOVIE_ID INT NOT NULL FK MOVIE PK
-    DIRECTOR_ID INT NOT NULL FK ACTOR PK
+    DIRECTOR_ID  INT NOT NULL FK ACTOR PK
 */
 
 module.exports = (sequelize, DataTypes) => {

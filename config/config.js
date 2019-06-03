@@ -7,3 +7,5 @@ const sequelize = new Sequelize('movies', 'movies-dba', 'moviesdba-1234', {
 })
 
 module.exports = sequelize
+
+//f

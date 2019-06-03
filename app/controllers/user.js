@@ -1,7 +1,7 @@
 //User table controller
 /*
     getUserById - implemented
-    updateUser - implemented
+    updateU ser - implemented
     destroyUser - implemented
 
     myReviews - implemented

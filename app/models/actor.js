@@ -1,6 +1,6 @@
 //Creating model actor table
 /*
-    ID INT NOT NULL PK_ACTOR AI
+    ID INT N OT NULL PK_ACTOR AI
     NAME VARCHAR(100) NOT NULL
     BORNDATE DATE NOT NULL
 */
