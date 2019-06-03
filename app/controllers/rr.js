@@ -1,7 +1,7 @@
 //RR table controller
 /*
     createReview - implemented
-    updateReview - implemented
+    updateReview - implemented 
     destroyReview - implemented
 */
 
