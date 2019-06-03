@@ -10,7 +10,7 @@
 */
 
 const sequelize = require('./../../config/config')
-const { MovieModel, ActorModel, AMModel, DirectorModel, DMModel, WriterModel, WMModel, RRModel } = require('./../models')
+const { MovieModel, DirectorModel, DMModel, WriterModel, WMModel, RRModel } = require('./../models')
 
 class Movie {
 
@@ -81,44 +81,39 @@ class Movie {
             .catch((error) => res.status(500).json({ message: 'Error on get actors of movie', error }))
     }
 
-    getAllDirectorsOfMovie(req, res) {
-        DMModel.findAll({
-            where: {
-                MOVIE_ID: req.params.id
-            },
-            include: [
-                {
-                    model: DirectorModel, as: 'DIRECTOR'
-                }
-            ]
-        })
-            .then((directorsOfMovie) => res.status(200).json({ message: 'Get directors of movie success', directorsOfMovie }))
-            .catch((error) => res.status(500).json({ message: 'Error on get directors of movie', error }))
+    getAverageRating(req, res) {
+        sequelize.query(
+            `SELECT 
+            FORMAT(AVG(RATING), 1) AS RATING_AVG
+        FROM
+            RR
+        WHERE
+            MOVIE_ID = ${req.params.id}`
+        )
+            .then((avgRating) => res.status(200).json(avgRating[0]))
+            .catch((error) => res.status(500).json({ message: 'Error on get avg rating', error }))
     }
 
-    getAllWritersOfMovie(req, res) {
-        WMModel.findAll({
-            where: {
-                MOVIE_ID: req.params.id
-            },
-            include: [
-                {
-                    model: WriterModel, as: 'WRITER'
-                }
-            ]
-        })
-            .then((writersOfMovie) => res.status(200).json({ message: 'Get writers of movie success', writersOfMovie }))
-            .catch((error) => res.status(500).json({ message: 'Error on get writers of movie', error }))
-    }
-
-    getAllReviewsOfMovie(req, res) {
-        RRModel.findAll({
-            where: {
-                MOVIE_ID: req.params.id
-            }
-        })
-            .then((reviewsOfMovie) => res.status(200).json({ message: 'Get reviews of movie success', reviewsOfMovie }))
-            .catch((error) => res.status(500).json({ message: 'Error on get reviews of movie', error }))
+    getReviews(req, res) {
+        sequelize.query(
+            `SELECT 
+            U.USERNAME,
+            FORMAT(R.RATING, 0) AS RATING,
+            R.REVIEW,
+            R.DATE_REVIEW,
+            M.TITLE
+        FROM
+            RR AS R
+                INNER JOIN
+            USER AS U ON U.ID = R.USER_ID
+                INNER JOIN
+            MOVIE AS M ON M.ID = R.MOVIE_ID
+        WHERE
+            R.MOVIE_ID = ${req.params.id}
+        ORDER BY DATE_REVIEW DESC`
+        )
+            .then((reviews) => res.status(200).json(reviews[0]))
+            .catch((error) => res.status(500).json({ message: 'Error on get reviews', error }))
     }
 }
 

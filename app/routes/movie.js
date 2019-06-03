@@ -17,8 +17,7 @@ route.get('/info-movies', MovieController.getInfoMovies)
 route.get('/storyline/:id', MovieController.getStoryline)
 route.get('/movie/:id', MovieController.getMovieById)
 route.get('/movie-actors/:id', MovieController.getAllActorsOfMovie)
-route.get('/movie-directors/:id', MovieController.getAllDirectorsOfMovie)
-route.get('/movie-writers/:id', MovieController.getAllWritersOfMovie)
-route.get('/movie-reviews/:id', MovieController.getAllReviewsOfMovie)
+route.get('/avg-rating/:id', MovieController.getAverageRating)
+route.get('/movie-reviews/:id', MovieController.getReviews)
 
 module.exports = route
