@@ -34,6 +34,7 @@ app.use('/', WriterRoutes)
 
 app.listen(port, function () {
     console.log(`api works on port ${port}`)
+    console.log(`Filmow API ||| Curso de Angular`)
 })
 
 module.exports = app
