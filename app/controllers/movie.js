@@ -10,7 +10,7 @@
 */
 
 const sequelize = require('./../../config/config')
-const { MovieModel } = require('./../models')
+const { MovieModel, DirectorModel, DMModel, WriterModel, WMModel, RRModel } = require('./../models')
 
 class Movie {
 
