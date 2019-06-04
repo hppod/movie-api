@@ -51,6 +51,14 @@ class Movie {
             .catch((error) => res.status(500).json({ message: 'Error on get movie by id', error }))
     }
 
+    getPoster(req, res) {
+        sequelize.query(
+            `SELECT POSTER_URL FROM MOVIE WHERE ID = ${req.params.id}`
+        )
+            .then((posterUrl) => res.status(200).json(posterUrl))
+            .catch((error) => res.status(500).json(error))
+    }
+
     getStoryline(req, res) {
         sequelize.query(
             `SELECT 
