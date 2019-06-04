@@ -15,6 +15,7 @@ const MovieController = require('./../controllers/movie')
 
 route.get('/movies/:page', MovieController.getMoviesPage)
 route.get('/storyline/:id', MovieController.getStoryline)
+route.get('/poster/:id', MovieController.getPoster)
 route.get('/movie/:id', MovieController.getMovieById)
 route.get('/movie-actors/:id', MovieController.getAllActorsOfMovie)
 route.get('/avg-rating/:id', MovieController.getAverageRating)
