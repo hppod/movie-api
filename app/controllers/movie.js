@@ -14,20 +14,31 @@ const { MovieModel, DirectorModel, DMModel, WriterModel, WMModel, RRModel } = re
 
 class Movie {
 
-    getInfoMovies(req, res) {
-        MovieModel.findAll({
-            attributes: [
-                'ID',
-                'TITLE',
-                [sequelize.fn('LEFT', sequelize.col('STORYLINE'), 75), 'STORYLINE'],
-                'POSTER_URL'
-            ],
-            order: [
-                ['DATE_PREMIERE', 'DESC']
-            ]
-        })
-            .then((infoMovies) => res.status(200).json(infoMovies))
-            .catch((error) => res.status(500).json({ message: 'Error on get ingo movies', error }))
+    getMoviesPage(req, res) {
+        let limit = 8
+        let offset = 0
+
+        MovieModel.findAndCountAll()
+            .then((data) => {
+                let page = req.params.page
+                let pages = Math.ceil(data.count / limit)
+                offset = limit * (page - 1)
+                MovieModel.findAll({
+                    attributes: [
+                        'ID',
+                        'TITLE',
+                        [sequelize.fn('LEFT', sequelize.col('STORYLINE'), 75), 'STORYLINE'],
+                        'POSTER_URL'
+                    ],
+                    order: [
+                        ['DATE_PREMIERE', 'DESC']
+                    ],
+                    limit: limit,
+                    offset: offset
+                })
+                    .then((movies) => res.status(200).json({ 'result': movies, 'count': data.count, 'pages': pages }))
+            })
+            .catch((error) => res.status(500).json(error))
     }
 
     getMovieById(req, res) {
@@ -115,6 +126,7 @@ class Movie {
             .then((reviews) => res.status(200).json(reviews[0]))
             .catch((error) => res.status(500).json({ message: 'Error on get reviews', error }))
     }
+
 }
 
 module.exports = new Movie()
