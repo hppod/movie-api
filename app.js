@@ -20,10 +20,13 @@ const MovieRoutes = require('./app/routes/movie')
 const RRRoutes = require('./app/routes/rr')
 const UserRoutes = require('./app/routes/user')
 const WriterRoutes = require('./app/routes/writer')
+const Authentication = require('./app/auth/auth')
 
 app.get('/', function (req, res) {
     res.send('api works')
 })
+
+app.post('/login', Authentication)
 
 app.use('/', ActorRoutes)
 app.use('/', DirectorRoutes)
