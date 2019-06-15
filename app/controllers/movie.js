@@ -36,7 +36,7 @@ class Movie {
                     limit: limit,
                     offset: offset
                 })
-                    .then((movies) => res.status(200).json({ 'result': movies, 'count': data.count, 'pages': pages }))
+                    .then((movies) => res.status(200).json({ result: movies, count: data.count, pages: pages }))
             })
             .catch((error) => res.status(500).json(error))
     }

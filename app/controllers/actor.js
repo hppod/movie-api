@@ -14,6 +14,34 @@ AMModel.belongsTo(ActorModel, { as: 'ACTOR', foreignKey: 'ACTOR_ID' })
 
 class Actor {
 
+    getActorsPage(req, res) {
+        let limit = 8
+        let offset = 0
+
+        ActorModel.findAndCountAll()
+            .then((data) => {
+                let page = req.params.page
+                let pages = Math.ceil(data.count / limit)
+                offset = limit * (page - 1)
+
+                ActorModel.findAll({
+                    attributes: [
+                        'ID',
+                        'NAME',
+                        'BORNDATE',
+                        'ACTOR_URL'
+                    ],
+                    order: [
+                        ['NAME', 'ASC']
+                    ],
+                    limit: limit,
+                    offset: offset
+                })
+                    .then((actors) => res.status(200).json({ result: actors, count: data.count, pages: pages }))
+            })
+            .catch((error) => res.status(500).json(error))
+    }
+
     getAllActors(req, res) {
         ActorModel.findAll({ raw: true })
             .then((allActors) => res.status(200).json({ message: 'Get all actors success', allActors }))
