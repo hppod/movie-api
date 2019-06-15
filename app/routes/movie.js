@@ -20,5 +20,7 @@ route.get('/movie/:id', MovieController.getMovieById)
 route.get('/movie-actors/:id', MovieController.getAllActorsOfMovie)
 route.get('/avg-rating/:id', MovieController.getAverageRating)
 route.get('/movie-reviews/:id', MovieController.getReviews)
+route.get('/movie-directors/:id', MovieController.getDirectorsOfMovie)
+route.get('/movie-writers/:id', MovieController.getWritersOfMovie)
 
 module.exports = route

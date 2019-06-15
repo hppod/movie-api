@@ -83,10 +83,38 @@ class Movie {
             .catch((error) => res.status(500).json({ message: 'Error on get storyline', error }))
     }
 
+    getDirectorsOfMovie(req, res) {
+        sequelize.query(
+            `SELECT
+                D.ID,
+                D.NAME
+            FROM DIRECTOR AS D
+            INNER JOIN DM ON D.ID = DM.DIRECTOR_ID
+            INNER JOIN MOVIE AS M ON M.ID = DM.MOVIE_ID
+            WHERE M.ID = ${req.params.id}`
+        )
+            .then((directors) => res.status(200).json(directors[0]))
+            .catch((error) => res.status(500).json(error))
+    }
+
+    getWritersOfMovie(req, res) {
+        sequelize.query(
+            `SELECT
+                W.ID,
+                W.NAME
+            FROM WRITER AS W
+            INNER JOIN WM ON W.ID = WM.WRITER_ID
+            INNER JOIN MOVIE AS M ON M.ID = WM.MOVIE_ID
+            WHERE M.ID = ${req.params.id}`
+        )
+            .then((writers) => res.status(200).json(writers[0]))
+            .catch((error) => res.status(500).json(error))
+    }
+
     getAllActorsOfMovie(req, res) {
         sequelize.query(
             `SELECT 
-            A.ID, A.CHARACTER_NAME, A.NAME, A.ACTOR_URL
+            A.ID, A.NAME, A.ACTOR_URL, AM.CHARACTER_NAME
         FROM
             ACTOR AS A
                 INNER JOIN

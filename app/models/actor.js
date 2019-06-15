@@ -15,12 +15,6 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
-        CHARACTER_NAME: {
-            type: DataTypes.STRING,
-            required: true,
-            max: 100,
-            allowNull: false
-        },
         NAME: {
             type: DataTypes.STRING,
             required: true,

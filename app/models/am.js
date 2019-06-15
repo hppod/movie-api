@@ -22,7 +22,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             references: 'ACTOR',
             referencesKey: 'ID'
-        }
+        },
+        CHARACTER_NAME: {
+            type: DataTypes.STRING,
+            required: true,
+            max: 100,
+            allowNull: false
+        },
     },
         {
             tableName: 'AM',
