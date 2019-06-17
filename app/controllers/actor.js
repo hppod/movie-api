@@ -15,6 +15,7 @@ AMModel.belongsTo(ActorModel, { as: 'ACTOR', foreignKey: 'ACTOR_ID' })
 
 class Actor {
 
+    // NAME ASC
     getActorsPage(req, res) {
         let limit = 8
         let offset = 0
@@ -22,6 +23,8 @@ class Actor {
         ActorModel.findAndCountAll()
             .then((data) => {
                 let page = req.params.page
+                let column = req.params.column
+                let order = req.params.order
                 let pages = Math.ceil(data.count / limit)
                 offset = limit * (page - 1)
 
@@ -33,7 +36,7 @@ class Actor {
                         'ACTOR_URL'
                     ],
                     order: [
-                        ['NAME', 'ASC']
+                        [`${column}`, `${order}`]
                     ],
                     limit: limit,
                     offset: offset
@@ -84,7 +87,8 @@ class Actor {
                 M.ID,
                 M.TITLE,
                 AM.CHARACTER_NAME,
-                M.POSTER_URL
+                M.POSTER_URL,
+                M.DATE_PREMIERE
             FROM MOVIE AS M
             INNER JOIN AM ON M.ID = AM.MOVIE_ID
             INNER JOIN ACTOR AS A ON A.ID = AM.ACTOR_ID

@@ -17,27 +17,49 @@ class Movie {
     getMoviesPage(req, res) {
         let limit = 8
         let offset = 0
+        let column = req.params.column
+        let order = req.params.order
+        let genre = req.query.genre || 'IS NOT NULL'
+        let date_premiere = req.query.date || 'IS NOT NULL'
+        let search = req.query.search || 'IS NOT NULL'
 
-        MovieModel.findAndCountAll()
+        sequelize.query(
+            `SELECT 
+                COUNT(*) AS ITEMS
+            FROM MOVIE
+            WHERE GENRE ${genre} AND DATE_PREMIERE ${date_premiere} AND TITLE ${search}`
+        )
             .then((data) => {
+                const items = data[0][0].ITEMS
                 let page = req.params.page
-                let pages = Math.ceil(data.count / limit)
+                let pages = Math.ceil(items / limit)
                 offset = limit * (page - 1)
-                MovieModel.findAll({
-                    attributes: [
-                        'ID',
-                        'TITLE',
-                        [sequelize.fn('LEFT', sequelize.col('STORYLINE'), 75), 'STORYLINE'],
-                        'POSTER_URL'
-                    ],
-                    order: [
-                        ['DATE_PREMIERE', 'DESC']
-                    ],
-                    limit: limit,
-                    offset: offset
-                })
-                    .then((movies) => res.status(200).json({ result: movies, count: data.count, pages: pages }))
+                sequelize.query(
+                    `SELECT
+                        M.ID,
+                        M.TITLE,
+                        LEFT(M.STORYLINE, 75) AS STORYLINE,
+                        M.POSTER_URL,
+                        M.DATE_PREMIERE
+                    FROM MOVIE AS M
+                    WHERE GENRE ${genre} AND DATE_PREMIERE ${date_premiere} AND TITLE ${search}
+                    ORDER BY ${column} ${order}
+                    LIMIT ${limit}
+                    OFFSET ${offset}`
+                )
+                    .then((movies) => res.status(200).json({ result: movies[0], count: items, pages: pages }))
             })
+            .catch((error) => res.status(500).json(error))
+    }
+
+    getGenres(req, res) {
+        sequelize.query(
+            `SELECT DISTINCT
+                M.GENRE
+            FROM MOVIE AS M
+            ORDER BY M.GENRE ASC`
+        )
+            .then((genres) => res.status(200).json(genres[0]))
             .catch((error) => res.status(500).json(error))
     }
 
