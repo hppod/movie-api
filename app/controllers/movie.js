@@ -52,6 +52,37 @@ class Movie {
             .catch((error) => res.status(500).json(error))
     }
 
+    getSearchTerm(req, res) {
+        const searchTerm = req.params.search
+
+        sequelize.query(
+            `SELECT 
+                DISTINCT COUNT(*) AS ITEMS
+            FROM MOVIE AS M
+            WHERE M.TITLE LIKE '%${searchTerm}%'`
+        )
+            .then((data) => {
+                const items = data[0][0].ITEMS
+
+                sequelize.query(
+                    `SELECT 
+                M.ID,
+                M.TITLE,
+                LEFT(M.STORYLINE, 75) AS STORYLINE,
+                M.POSTER_URL,
+                M.DATE_PREMIERE
+            FROM
+                MOVIE AS M
+            WHERE
+                M.TITLE LIKE '%${searchTerm}%'
+            ORDER BY M.DATE_PREMIERE DESC`
+                )
+                    .then((results) => res.status(200).json({ results: results[0], count: items }))
+            })
+
+            .catch((error) => res.status(500).json(error))
+    }
+
     getGenres(req, res) {
         sequelize.query(
             `SELECT DISTINCT
@@ -184,6 +215,8 @@ class Movie {
             .then((reviews) => res.status(200).json(reviews[0]))
             .catch((error) => res.status(500).json({ message: 'Error on get reviews', error }))
     }
+
+
 
 }
 
