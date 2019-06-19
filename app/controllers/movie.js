@@ -53,6 +53,8 @@ class Movie {
     }
 
     getSearchTerm(req, res) {
+        let limit = 8
+        let offset = 0
         const searchTerm = req.params.search
 
         sequelize.query(
@@ -63,6 +65,9 @@ class Movie {
         )
             .then((data) => {
                 const items = data[0][0].ITEMS
+                let page = req.params.page
+                let pages = Math.ceil(items / limit)
+                offset = limit * (page - 1)
 
                 sequelize.query(
                     `SELECT 
@@ -75,9 +80,11 @@ class Movie {
                 MOVIE AS M
             WHERE
                 M.TITLE LIKE '%${searchTerm}%'
-            ORDER BY M.DATE_PREMIERE DESC`
+            ORDER BY M.DATE_PREMIERE DESC
+            LIMIT ${limit}
+            OFFSET ${offset}`
                 )
-                    .then((results) => res.status(200).json({ results: results[0], count: items }))
+                    .then((results) => res.status(200).json({ results: results[0], count: items, pages: pages }))
             })
 
             .catch((error) => res.status(500).json(error))

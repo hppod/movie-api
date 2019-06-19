@@ -24,6 +24,6 @@ route.get('/movie-reviews/:id', MovieController.getReviews)
 route.get('/movie-directors/:id', MovieController.getDirectorsOfMovie)
 route.get('/movie-writers/:id', MovieController.getWritersOfMovie)
 
-route.get('/movies/:search', MovieController.getSearchTerm)
+route.get('/movies/:page/:search', MovieController.getSearchTerm)
 
 module.exports = route
