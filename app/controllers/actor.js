@@ -57,7 +57,6 @@ class Actor {
             WHERE NAME LIKE '%${searchTerm}%'`
         )
             .then((data) => {
-                console.log(data)
                 const items = data[0][0].ITEMS
                 let page = req.params.page
                 let pages = Math.ceil(items / limit)
