@@ -20,4 +20,6 @@ route.get('/actors', ActorController.getAllActors)
 route.get('/actors-movies', ActorController.getActorsAndMovies)
 route.get('/actor-movies/:id', ActorController.getActorAndMovies)
 
+route.get('/actors/:page/:search', ActorController.getSearchTerm)
+
 module.exports = route
