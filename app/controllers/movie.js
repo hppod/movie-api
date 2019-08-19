@@ -90,6 +90,44 @@ class Movie {
             .catch((error) => res.status(500).json(error))
     }
 
+    getMoviesInTheaters(req, res) {
+        sequelize.query(
+            `
+            SELECT 
+            M.ID,
+            M.TITLE,
+            M.POSTER_URL,
+            M.DATE_PREMIERE,
+            DATEDIFF(NOW(), M.DATE_PREMIERE) AS DIAS_CARTAZ
+        FROM
+            MOVIE AS M
+        WHERE
+            M.DATE_PREMIERE BETWEEN (DATE_SUB(NOW(), INTERVAL 30 DAY)) AND NOW()
+        ORDER BY M.DATE_PREMIERE DESC;
+            `
+        )
+            .then((result) => res.status(200).json(result[0]))
+            .catch((error) => res.status(500).json(error))
+    }
+
+    getMoviesComingSoon(req, res) {
+        sequelize.query(
+            `SELECT 
+            M.ID,
+            M.TITLE,
+            M.POSTER_URL,
+            M.DATE_PREMIERE,
+            DATEDIFF(M.DATE_PREMIERE, NOW()) AS DIAS_ESTREIA
+        FROM
+            MOVIE AS M
+        WHERE
+            M.DATE_PREMIERE BETWEEN NOW() AND (DATE_ADD(NOW(), INTERVAL 6 MONTH))
+        ORDER BY M.DATE_PREMIERE ASC;`
+        )
+            .then((result) => res.status(200).json(result[0]))
+            .catch((error) => res.status(500).json(error))
+    }
+
     getGenres(req, res) {
         sequelize.query(
             `SELECT DISTINCT
